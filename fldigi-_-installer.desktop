@@ -1,0 +1,27 @@
+#!/bin/bash
+
+pkexec apt install asciidoc debhelper docbook-xsl libfltk1.3-dev libflxmlrpc-dev libhamlib-dev libmbedtls-dev libpng-dev libpulse-dev libsamplerate0-dev libsndfile1-dev portaudio19-dev xsltproc wget git grep curl gcc g++ make -y
+pew=$0
+mkdir /tmp/fidigi-_-install-_-folder
+cd /tmp/fidigi-_-install-_-folder
+rm -R *
+wget http://www.w1hkj.com/files/archives/Source/fldigi-4.1.13.tar.gz
+tar -xf fldigi-4.1.13.tar.gz
+cd fldigi-4.1.13
+./configure
+make
+pkexec make installc
+cp data/flarq.desktop $HOME/Desktop/
+cp data/fldigi.desktop $HOME/Desktop/
+cd ..
+mv fldigi-4.1.13/ $HOME/.fldigi-files
+
+[Desktop Entry]
+Type=Application
+Name=fldigi installer
+Terminal=true
+Exec=sh -c '"$(dirname "$*")"/ok/fldigi-_-installer.desktop || ([ ! -x "$(dirname "$*")"/ok/fldigi-_-installer.desktop ] && "$(dirname "$*")"/fldigi-_-installer.desktop )' dummy %k
+Icon=text-x-install
+
+
+
