@@ -1,7 +1,12 @@
 #!/bin/bash
 
-pkexec apt install asciidoc debhelper docbook-xsl libfltk1.3-dev libflxmlrpc-dev libhamlib-dev libmbedtls-dev libpng-dev libpulse-dev libsamplerate0-dev libsndfile1-dev portaudio19-dev xsltproc wget git grep curl gcc g++ make zenity -y
-exec 2> $HOME/fllog
+
+
+# pkexec ls /root > /dev/null
+
+ pkexec apt install asciidoc debhelper docbook-xsl libfltk1.3-dev libflxmlrpc-dev libhamlib-dev libmbedtls-dev libpng-dev libpulse-dev libsamplerate0-dev libsndfile1-dev portaudio19-dev xsltproc wget git grep curl gcc g++ make zenity -y
+rm $HOME/fllog
+exec 2>> $HOME/fllog
 ch () {
 
 if [ "Status: install ok installed" != "$(dpkg-query -s $1 | grep Status)" ]
@@ -25,6 +30,17 @@ cd ..
 tar -xf tar/*.tar.gz 
 cd fldigi*
 ./configure
+
+
+# if [ $(wc MAKEFILE) = "wc: MAKEFILE: No such file or directory" ]
+# then
+# zenity --error --title="error" --text="configure faild"
+# exit
+# fi
+
+
+
+# exit
 make
 pkexec make install
 cp data/flarq.desktop $HOME/Desktop/
@@ -38,6 +54,7 @@ Name=fldigi installer
 Terminal=true
 Exec=sh -c '"$(dirname "$*")"/ok/fldigi-_-installer.desktop || ([ ! -x "$(dirname "$*")"/ok/fldigi-_-installer.desktop ] && "$(dirname "$*")"/fldigi-_-installer.desktop )' dummy %k
 Icon=text-x-install
+
 
 
 
