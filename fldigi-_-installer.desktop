@@ -2,16 +2,17 @@
 
 
 
-# pkexec ls /root > /dev/null
+#  pkexec ls /root > /dev/null
 
- pkexec apt install asciidoc debhelper docbook-xsl libfltk1.3-dev libflxmlrpc-dev libhamlib-dev libmbedtls-dev libpng-dev libpulse-dev libsamplerate0-dev libsndfile1-dev portaudio19-dev xsltproc wget git grep curl gcc g++ make zenity -y
+  pkexec apt install asciidoc debhelper docbook-xsl libfltk1.3-dev libflxmlrpc-dev libhamlib-dev libmbedtls-dev libpng-dev libpulse-dev libsamplerate0-dev libsndfile1-dev portaudio19-dev xsltproc wget git grep curl gcc g++ make zenity -y
 rm $HOME/fllog
-exec 2>> $HOME/fllog
+
 ch () {
 
 if [ "Status: install ok installed" != "$(dpkg-query -s $1 | grep Status)" ]
 then  
 zenity --error --title="error" --text="the package $1 can not be installed check the log file at $HOME/fllog exiting"
+exec 2>> $HOME/fllog
 exit
 fi
 }
@@ -29,14 +30,15 @@ wget $(if [ "$1x" = "x" ]; then echo http://www.w1hkj.com/files/archives/Source/
 cd ..
 tar -xf tar/*.tar.gz 
 cd fldigi*
-./configure
+ ./configure
 
 
-# if [ $(wc MAKEFILE) = "wc: MAKEFILE: No such file or directory" ]
-# then
-# zenity --error --title="error" --text="configure faild"
-# exit
-# fi
+if [ "$(wc Makefile)" != "wc: Makefile: No such file or directory"  ]
+ then
+ zenity --error --title="error" --text="configure faild"
+ exec 2>> $HOME/fllog
+ exit
+ fi
 
 
 
@@ -47,7 +49,7 @@ cp data/flarq.desktop $HOME/Desktop/
 cp data/fldigi.desktop $HOME/Desktop/
 cd ..
 mv fldigi-4.1.13/ $HOME/.fldigi-files
-
+exec 2>> $HOME/fllog
 [Desktop Entry]
 Type=Application
 Name=fldigi installer
