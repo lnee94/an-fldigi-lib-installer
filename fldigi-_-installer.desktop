@@ -5,9 +5,12 @@ pew=$0
 mkdir /tmp/fidigi-_-install-_-folder
 cd /tmp/fidigi-_-install-_-folder
 rm -R *
+mkdir tar
+cd tar
 wget http://www.w1hkj.com/files/archives/Source/fldigi-4.1.13.tar.gz
-tar -xf fldigi-4.1.13.tar.gz
-cd fldigi-4.1.13
+cd ..
+tar -xf tar/*.tar.gz 
+cd fldigi*
 ./configure
 make
 pkexec make installc
