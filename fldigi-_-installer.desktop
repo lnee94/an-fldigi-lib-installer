@@ -1,13 +1,26 @@
 #!/bin/bash
 
-pkexec apt install asciidoc debhelper docbook-xsl libfltk1.3-dev libflxmlrpc-dev libhamlib-dev libmbedtls-dev libpng-dev libpulse-dev libsamplerate0-dev libsndfile1-dev portaudio19-dev xsltproc wget git grep curl gcc g++ make -y
+pkexec apt install asciidoc debhelper docbook-xsl libfltk1.3-dev libflxmlrpc-dev libhamlib-dev libmbedtls-dev libpng-dev libpulse-dev libsamplerate0-dev libsndfile1-dev portaudio19-dev xsltproc wget git grep curl gcc g++ make zenity -y
+exec 2> $HOME/fllog
+ch () {
+
+if [ "Status: install ok installed" != "$(dpkg-query -s $1 | grep Status)" ]
+then  
+zenity --error --title="error" --text="the package $1 can not be installed check the log file at $HOME/fllog exiting"
+exit
+fi
+}
+
+
+ ch asciidoc;ch debhelper;ch docbook-xsl;ch libfltk1.3-dev;ch libflxmlrpc-dev;ch libhamlib-dev;ch libmbedtls-dev;ch libpng-dev;ch libsamplerate0-dev;ch libsndfile1-dev;ch portaudio19-dev;ch xsltproc;ch wget;ch git;ch grep;ch curl;ch gcc;ch g++;ch make;ch zenity
+
 pew=$0
 mkdir /tmp/fidigi-_-install-_-folder
 cd /tmp/fidigi-_-install-_-folder
 rm -R *
 mkdir tar
 cd tar
-wget http://www.w1hkj.com/files/archives/Source/fldigi-4.1.13.tar.gz
+wget $(if [ "$1x" = "x" ]; then echo http://www.w1hkj.com/files/archives/Source/fldigi-4.1.13.tar.gz; else echo $1; fi)
 cd ..
 tar -xf tar/*.tar.gz 
 cd fldigi*
