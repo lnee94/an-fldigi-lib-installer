@@ -26,7 +26,7 @@ tar -xf tar/*.tar.gz
 cd fldigi*
 ./configure
 make
-pkexec make installc
+pkexec make install
 cp data/flarq.desktop $HOME/Desktop/
 cp data/fldigi.desktop $HOME/Desktop/
 cd ..
