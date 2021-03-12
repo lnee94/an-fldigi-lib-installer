@@ -1,8 +1,23 @@
 #!/bin/bash
 
+if [ "Status: install ok installed" != "$(dpkg-query -s git | grep Status)" ]
+then
+pkexec apt install git
+fi
+
 if [ $(id -u) != "0" ]
 then
-pkexec $0
+
+rm -R -f /tmp/fdgjklhfdahjkghjkfdgjfdakhgfhkdakj
+mkdir /tmp/fdgjklhfdahjkghjkfdgjfdakhgfhkdakj
+cd /tmp/fdgjklhfdahjkghjkfdgjfdakhgfhkdakj
+git clone https://github.com/lnee94/an-fldigi-lib-installer.git 
+echo $0
+cd an-fldigi-lib-installer
+ mv fldigi-_-installer.desktop $0
+
+ pkexec $0
+
 fi
 
 
