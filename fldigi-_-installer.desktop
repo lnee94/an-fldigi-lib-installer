@@ -46,7 +46,7 @@ cd /tmp/fidigi-_-install-_-folder
 rm -R *
 mkdir tar
 cd tar
-wget $(if [ "$1x" = "x" ]; then echo http://www.w1hkj.com/files/archives/Source/fldigi-4.1.13.tar.gz; else echo $1; fi)
+if [ "$1x" = "x" ]; then wget http://www.w1hkj.com/files/archives/Source/fldigi-4.1.13.tar.gz; else cp $1 .; fi
 cd ..
 tar -xf tar/*.tar.gz 
 cd fldigi*
