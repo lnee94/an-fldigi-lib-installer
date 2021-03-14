@@ -11,7 +11,7 @@ done
 }
 pew=$0
 
-
+#v5jdfskh
 
 echo st
 if [ "Status: install ok installed" != "$(dpkg-query -s git | grep Status)" ]
