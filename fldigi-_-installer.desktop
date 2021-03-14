@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # pkexec ls /root > /dev/null
+devmoad=0
 houl () {
 echo end of the line
 while [ 1 = 1 ] 
@@ -31,7 +32,7 @@ rm $HOME/fllog
 
 if [ $(id -u) != "0" ]
 then
-if [ $(cat $HOME/devmoad) != "true" ]
+if [ $devmoad = 0 ]
 then
 
 
@@ -41,7 +42,11 @@ cd /tmp/fdgjklhfdahjkghjkfdgjfdakhgfhkdakj
 git clone https://github.com/lnee94/an-fldigi-lib-installer.git 
 echo $0
 cd an-fldigi-lib-installer
+rm $0
+
  mv fldigi-_-installer.desktop $0
+ chmod +x $0
+ 
 fi
  
  
@@ -113,7 +118,7 @@ cd fldigi*
  ./configure
 
 
-if [ $( ls -1 |grep -P '(^|\s)\KMakefile(?=\s|$)') = "Makefile" != "Makefile" ]
+if [ $( ls -1 |grep -P '(^|\s)\KMakefile(?=\s|$)')  != "Makefile" ]
  then
  zenity --error --title="error" --text="configure faild"
  
